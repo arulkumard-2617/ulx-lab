@@ -1,0 +1,57 @@
+---
+description: Prefer ULX components and utility classes in ulx-lab screens
+globs: app/**/*.{gjs,hbs,js}
+---
+
+# ULX UI Standards (lab)
+
+Use this rule when creating or updating lab screens (`.gjs`, `.hbs`).
+
+## References
+
+- `ulx-components`: `node_modules/ulx-components/` (sibling checkout via `file:../ulx-components`).
+- ULX component source (read-only): `node_modules/ulx-components/src/components/` or `../ulx-components/src/components/`.
+- ULX demo pages (read-only examples): `../ulx-components/ulx/src/demo/ulx-ember/app/components/Demo/`.
+- Utility vocabulary: `../ulx-components/ulx/src/demo/ulx-ember/app/data/util-nav-schema.js`.
+- Do not edit `ulx-components` or `uls_v2`.
+
+## Prefer ULX components
+
+- Use `ulx-components` before raw HTML controls or custom widgets.
+- Overlays: `UlxModal`, `UlxSlidePane`, `UlxPopup`, `UlxTooltip`.
+- Forms: `UlxForm`, `UlxFieldSet`, `UlxField`, `UlxInput`, `UlxTextarea`, `UlxCheckbox`, `UlxRadio`, `UlxRadioPanelGroup`, `UlxDropdown`, `UlxMultiSelect`, `UlxChipInput`, `UlxDatePicker`, `UlxDateRangePicker`, `UlxTimePicker`.
+- Actions and display: `UlxButton`, `UlxIconButton`, `UlxSplitButton`, `UlxTag`, `UlxMessage`, `UlxAccordion`, `UlxEmptyState`, `UlxTable`, `UlxPaginator`, `UlxAvatar`, `UlxDivider`.
+- Prefer component APIs (`@variant`, `@size`, `@label`, `@customClass`, named blocks when required) over custom DOM/CSS.
+- Import ULX from the barrel: `import { UlxButton } from 'ulx-components';`
+
+## Prefer ULX utility classes
+
+- Refer to `util-nav-schema.js` before inventing custom classes.
+- Spacing: `m-*`, `mt-*`, `mb-*`, `ms-*`, `me-*`, `mx-*`, `my-*`, `m-auto`, `ms-auto`, `me-auto`, `mx-auto`, `my-auto`; `p-*`, `pt-*`, `pb-*`, `ps-*`, `pe-*`, `px-*`, `py-*`; `gap-*`, `row-gap-*`, `col-gap-*`.
+- Flex/Grid: `flex`, `inline-flex`, `flex-row`, `flex-col`, `flex-wrap`, `flex-nowrap`, `flex-1`, `flex-auto`, `flex-none`, `grow`, `shrink`, `items-*`, `content-*`, `self-*`, `justify-*`, `place-*`, `order-*`, `ulx-grid`, `col-*`, `row-*`, `grid-cols-*`, `grid-rows-*`.
+- Sizing: `w-*`, `min-w-*`, `max-w-*`, `h-*`, `min-h-*`, `max-h-*`, `w-full`, `h-full`, `w-auto`, `h-auto`.
+- Tag/segment color combos: `color-red fg-red`, `color-primaryLayer`, `color-light-samon-red`.
+- Typography: `text-*`, `font-*` or existing helpers (`medium-font`, `bold-font`, `h7-font`), `line-*`, `leading-*`, `whitespace-*`, `break-*`, `truncate`, `line-clamp-*`.
+- Colors: token utilities `fg-*`, `text-*`, `bg-*`, `border-*`, and semantic variants (`text-primary`, `text-secondary`, `fg-red`, `fg-gold`, `bg-layer1`).
+- Display/Layout: `block`, `inline-block`, `hidden`, `relative`, `absolute`, `fixed`, `sticky`, `float-*`, `clear-*`, `visible`, `invisible`, `pointer-events-*`, `select-*`.
+- Borders/Effects: `border`, `border-*`, `rounded`, `rounded-*`, `shadow-*`, `opacity-*`, `ulx-segment`, and component variants.
+- Overflow/Object/Table/Transform: `overflow-*`, `overflow-x-*`, `overflow-y-*`, `object-*`, `table-*`, `translate-*`, `rotate-*`, `scale-*`, `transition-*`, `animation-*`.
+- Cursor and state: `pointer`, `not-allowed`, `move`, `grab`, `grabbing`, `disabled`, `inactive-css` only when appropriate.
+- Avoid new custom CSS or brittle selectors when a component arg or utility covers the need.
+
+## Strict `.gjs` templates
+
+- Import helpers/modifiers used in `.gjs` templates (`on` from `@ember/modifier`, truth helpers from `ember-truth-helpers`).
+- Import ULX components explicitly in `.gjs` files.
+
+## `data-qa` / `@dataQa`
+
+Add meaningful `data-qa` identifiers on interactive UI.
+
+- ULX components: `@dataQa` (camelCase). Overlay masks may also expose `@maskQa`.
+- Plain HTML: `data-qa="..."`.
+- Values reflect **screen + purpose**, kebab-case: `{feature}-{control}` or `{feature}-{control}-{part}`.
+  - Good: `ticket-class-quantity-field`, `ticket-class-save`
+  - Avoid: `ulx-input`, `button1`, `field`, `test`
+- Field wrappers: suffix `-field` on `UlxField`; the inner control reuses the stem without `-field`.
+- Keep names stable; do not rename existing values unless asked.

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ULX Lab</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{content-for "head"}}
+
+    <link
+      rel="stylesheet"
+      href="{{rootURL}}styles/guls-style.css"
+    >
+    <link
+      rel="stylesheet"
+      href="{{rootURL}}styles/uls-editor-new-style.css"
+    >
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ulx-lab.css">
+    
+
+    {{content-for "head-footer"}}
+  </head>
+  <body class="body uls-default-mode  ulx-default-mode default ulx-default zoho-puvi screen-zooming-size1 uls-global-text-size1-0">
+    {{content-for "body"}}
+
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/ulx-lab.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

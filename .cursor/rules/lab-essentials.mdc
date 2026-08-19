@@ -1,0 +1,49 @@
+---
+description: ULX Lab essentials — always follow
+alwaysApply: true
+---
+
+# ULX Lab essentials
+
+## Boundaries
+
+- Implement **only** in this `ulx-lab` repo.
+- **Never** edit Eventz or `ulx-components` source (`../ulx-components/src`).
+- Do not add library demos under `ulx-components`. This app consumes ULX; it does not author the library.
+
+## Screens
+
+- Presentational UI lives in `app/components/screens/*.gjs`.
+- Shared editor chrome lives in `app/components/commons/` (`home-page-template`, `event-page-template`, home/event top and left bars). When adding a page, wrap it in the matching page template.
+- Static fixtures live in `app/mocks/*.js`.
+- Thin route + template glue supplies mocks and `@onSave` / `@onCancel` (or similar args).
+- Register every new screen in `app/data/screens.js` and `app/router.js`.
+- Public API is args only. No Ember Data, no real APIs, no Eventz models or services.
+- Use Ember 6.8 Glimmer `.gjs`: `@tracked`, `@action`, barrel imports (`import { UlxButton } from 'ulx-components'`).
+- User-facing copy is plain English literals. Eventz i18n happens at copy time.
+
+## Tune, do not regenerate
+
+- After a screen exists, property changes (size, width, variant, label) are **surgical arg edits**, not a new screen.
+- Lift tunable ULX args onto the presentational component (`@size`, `@width`, …) with a `SCREEN_DEFAULTS` block.
+- Add lab-only controls in `app/data/controls/` and register them in `app/data/screen-settings.js`. The application top bar **Settings** control opens a `UlxSlidePane` with `LabArgControls` (`@screenId` required so changes persist). Demo routes stay demos — do not put the inspector on the screen template or a settings route.
+- For UlxModal `@size`, use `optionsFrom: 'dialog.sizes'` (tokens from `uls_v2` `dialog.less`, generated at build into `app/data/uls-tokens/dialog.js`). Do not hardcode XS–XL.
+- Adjusting a control **writes the presentational `.gjs` defaults** via `/__lab/persist-args` (`ember serve` only). Do not regenerate the screen.
+- Register persistable screens in `server/index.js` `LAB_SCREENS`.
+
+## Components and styling
+
+- Compose existing `Ulx*` components. Do not invent wrappers that re-skin ULX internals.
+- CSS classes: only ULS v2 / ULX utilities. No new CSS files, no inline styles, no ad-hoc class names.
+- Named blocks: lowercase; if any named block exists, put body in `<:default>`. Prefer `@argument` over a named block when the API already covers the case.
+- Accessibility: semantic HTML, `...attributes` where needed, `@dataQa` on interactive ULX controls.
+- Theme is **editor** (`ulx-editor.less`). Do not switch to community/onair unless asked.
+
+## Skills
+
+- Choosing a control → `ulx-component-discovery`
+- Application layout/styling → `ulx-consumer-ui`
+- Forms → `ulx-form-patterns`
+- Overlays, menus, feedback → `ulx-ui-patterns`
+- Tables, lists, cards → `ulx-data-display-patterns`
+- Copying into Eventz → `ulx-lab-handoff`
