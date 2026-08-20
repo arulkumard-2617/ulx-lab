@@ -7,7 +7,7 @@ export default class ApplicationTemplate extends Component {
 
   get usesPageChrome() {
     const name = this.router.currentRouteName ?? '';
-    return name.startsWith('home') || name.startsWith('event');
+    return name.startsWith('home') || name.startsWith('event-home');
   }
 
   <template>

@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import {
   UlxButton,
@@ -22,6 +23,7 @@ import { EVENT_TABS, eventsMock } from 'ulx-lab/mocks/events';
 
 export default class EventListing extends Component {
   @service router;
+  @service currentEvent;
 
   @tracked activeTab = this.args.model?.activeTab ?? 'running';
   @tracked query = '';
@@ -29,7 +31,7 @@ export default class EventListing extends Component {
   manageItems = [{ label: 'Preview' }, { label: 'View Website' }];
 
   get eventRoute() {
-    return this.args.eventRoute ?? 'event';
+    return this.args.eventRoute ?? 'event-home.manage.event-info';
   }
 
   get events() {
@@ -85,7 +87,13 @@ export default class EventListing extends Component {
 
   @action
   openEvent(eventId) {
-    this.router.transitionTo(this.eventRoute, eventId);
+    this.currentEvent.select(eventId);
+    this.router.transitionTo(this.eventRoute);
+  }
+
+  @action
+  selectEvent(eventId) {
+    this.currentEvent.select(eventId);
   }
 
   <template>
@@ -185,8 +193,8 @@ export default class EventListing extends Component {
                   <div class="flex items-center gap-2">
                     <LinkTo
                       @route={{this.eventRoute}}
-                      @model={{event.id}}
                       @activeClass=""
+                      {{on "click" (fn this.selectEvent event.id)}}
                       data-qa="event-listing-title-{{event.id}}"
                     >
                       <h2 class="text-h5 bold-font">{{event.name}}</h2>

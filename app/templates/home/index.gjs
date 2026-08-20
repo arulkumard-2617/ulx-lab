@@ -43,7 +43,7 @@ export default class HomeEventListingPage extends Component {
     <EventListing
       @model={{@model}}
       @onCreateEvent={{this.openCreate}}
-      @eventRoute="event"
+      @eventRoute="event-home.manage.event-info"
     />
     <CreateEventModal
       @isOpen={{this.isCreateOpen}}

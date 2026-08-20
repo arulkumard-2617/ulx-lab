@@ -11,7 +11,7 @@ import { UlxButton, UlxIconButton, UlxAvatar, UlxTag, UlxIcon } from 'ulx-compon
         <div class="top-bar-header">
           <div class="fxb fvc mgl2">
             <LinkTo
-              @route="home.event-listing"
+              @route="home.index"
               aria-label="Back to home"
               data-qa="event-top-bar-home"
             >

@@ -59,7 +59,7 @@ export default class LabAppBar extends Component {
     >
       <UlxToolbar aria-label="ULX Lab">
         <:start>
-          <LinkTo @route="home.event-listing" class="medium-font">ULX Lab</LinkTo>
+          <LinkTo @route="home.index" class="medium-font">ULX Lab</LinkTo>
         </:start>
         <:end>
           {{#if SETTINGS_ENABLED}}

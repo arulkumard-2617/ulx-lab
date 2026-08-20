@@ -6,15 +6,20 @@ export const SCREENS = [
   {
     id: 'home',
     title: 'Home',
-    route: 'home.event-listing',
+    route: 'home.index',
     description:
       'Home event listing. Click an event title or Manage to open Basic Details.',
   },
   {
+    id: 'portal-settings',
+    title: 'Portal Settings',
+    route: 'home.portal-settings',
+    description: 'Home chrome with Portal Settings. Add the form when you need it.',
+  },
+  {
     id: 'event-info',
     title: 'Event Info',
-    route: 'event',
-    model: 'ticket-module',
+    route: 'event-home.manage.event-info',
     description: 'Event chrome with Basic Details. Add more event pages later.',
   },
   {

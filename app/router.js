@@ -7,11 +7,22 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('home', { path: '/' }, function () {
-    this.route('event-listing', { path: '' });
+  this.route('home', function () {
+    this.route('portal-settings');
   });
-  this.route('event', { path: 'event/:event_id' }, function () {
-    this.route('page', { path: ':page_id' });
+  this.route('event-home', { path: 'home/event-home' }, function () {
+    this.route('manage', function () {
+      this.route('event-info');
+      this.route('team');
+      this.route('agenda');
+      this.route('speakers');
+      this.route('sponsors');
+      this.route('promote');
+      this.route('engagement');
+      this.route('event-library');
+      this.route('custom-forms');
+      this.route('onair');
+    });
   });
   this.route('screens', function () {
     this.route('ticket-class-form');
